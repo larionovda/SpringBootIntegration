@@ -35,7 +35,7 @@ public class DataProductImpl implements DataProduct {
     @Override
     @Cacheable("product")
     public Product getProductByArticle(Long article) {
-        return jdbcTemplate.queryForObject(SQL_QUERY_GET_PRODUCT_ID,  new Object[]{article}, productMapper);
+        return jdbcTemplate.queryForObject(SQL_QUERY_GET_PRODUCT_ID, new Object[]{article}, productMapper);
     }
 
     @Override

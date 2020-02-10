@@ -23,6 +23,4 @@ public class SoapController {
         response.setBrand(brandService.getBrandByID(request.getId()));
         return response;
     }
-
-
 }

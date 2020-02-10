@@ -4,12 +4,13 @@ import com.larionov.epam.item.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public interface ProductService {
-    Product getProductByArticle(Long Article);
+    CompletableFuture<Product> getProductByArticle(Long Article);
 
-    List<Product> getAllProduct();
+    CompletableFuture<List<Product>> getAllProduct();
 
     void addNewProducts(Product product);
 

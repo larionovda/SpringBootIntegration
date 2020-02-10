@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-@RestController
+@org.springframework.web.bind.annotation.RestController
 @RequestMapping("product")
-public class ProductController {
+public class RestController {
 
     @Autowired
     ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts(){
+    public CompletableFuture<List<Product>> getAllProducts() {
         return productService.getAllProduct();
     }
 
-    //localhost:9090/product/1
     @GetMapping("{article}")
-    public Product getProductById(@PathVariable Long article) {
+    public CompletableFuture<Product> getProductByIdAs(@PathVariable Long article) {
         return productService.getProductByArticle(article);
     }
 

@@ -35,6 +35,6 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
         defaultWsdl11Definition.setLocationUri("/service/brand");
         defaultWsdl11Definition.setTargetNamespace("http://larionov.com/epam-spring-boot-soap");
         defaultWsdl11Definition.setSchema(brandSchema);
-        return  defaultWsdl11Definition;
+        return defaultWsdl11Definition;
     }
 }
