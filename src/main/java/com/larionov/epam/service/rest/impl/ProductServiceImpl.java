@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -18,14 +20,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Async
     @Override
-    public CompletableFuture<Product> getProductByArticle(Long article) {
-        return CompletableFuture.completedFuture(dataProduct.getProductByArticle(article));
+    public CompletableFuture<List<Product>> getProductsByPrice(BigDecimal price) throws ExecutionException, InterruptedException {
+        return CompletableFuture.completedFuture(dataProduct.getProductsByPrice(price));
     }
 
     @Async
     @Override
-    public CompletableFuture<List<Product>> getAllProduct() {
+    public CompletableFuture<List<Product>> getAllProduct() throws ExecutionException, InterruptedException {
         return CompletableFuture.completedFuture(dataProduct.getAllProducts());
+    }
+
+    @Async
+    @Override
+    public CompletableFuture<Product> getProductByArticle(Long article) {
+        return CompletableFuture.completedFuture(dataProduct.getProductByArticle(article));
     }
 
     @Async
@@ -42,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Async
     @Override
-    public void updateProductByArticle(Product product, Long article) {
-        dataProduct.updateProductById(article, product.getIdBrand(), product.getIdType(), product.getIdCategory(), product.getPrice(), product.getIdSupplier());
+    public void updateProductByArticle(Product product) {
+        dataProduct.updateProductById(product.getArticle(), product.getIdBrand(), product.getIdType(), product.getIdCategory(), product.getPrice(), product.getIdSupplier());
     }
 }

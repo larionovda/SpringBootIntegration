@@ -14,8 +14,8 @@ import java.util.List;
 @Repository
 public class DataProductImpl implements DataProduct {
 
-    private final String SQL_QUERY_GET_PRODUCT_ID = "SELECT *\n" +
-            "\tFROM public.\"Products\" where article = ?";
+    private final String SQL_QUERY_GET_PRODUCT_PRICE = "SELECT *\n" +
+            "\tFROM public.\"Products\" where price = ?";
     private final String SQL_QUERY_GET_ALL = "SELECT * FROM public.\"Products\"";
     private final String SQL_INSERT_INTO = "INSERT INTO public.\"Products\"(\n" +
             "\tid_brand, id_type, id_category, price, id_supplier)\n" +
@@ -25,6 +25,8 @@ public class DataProductImpl implements DataProduct {
     private final String SQL_UPDATE_BY_ID = "UPDATE public.\"Products\"\n" +
             "\tSET id_brand = ?, id_type = ?, id_category = ?, price = ?, id_supplier = ?\n" +
             "\tWHERE article = ?;";
+    private final String SQL_QUERY_GET_PRODUCT_ID = "SELECT *\n" +
+            "\tFROM public.\"Products\" where article = ?";
 
 
     @Autowired
@@ -33,15 +35,19 @@ public class DataProductImpl implements DataProduct {
     private ProductMapper productMapper;
 
     @Override
-    @Cacheable("product")
-    public Product getProductByArticle(Long article) {
-        return jdbcTemplate.queryForObject(SQL_QUERY_GET_PRODUCT_ID, new Object[]{article}, productMapper);
+    public List<Product> getProductsByPrice(BigDecimal price) {
+        return jdbcTemplate.query(SQL_QUERY_GET_PRODUCT_PRICE, new Object[]{price}, productMapper);
     }
 
     @Override
-    @Cacheable("listProducts")
     public List<Product> getAllProducts() {
         return jdbcTemplate.query(SQL_QUERY_GET_ALL, productMapper);
+    }
+
+    @Override
+    @Cacheable("product")
+    public Product getProductByArticle(Long article) {
+        return jdbcTemplate.queryForObject(SQL_QUERY_GET_PRODUCT_ID, new Object[]{article}, productMapper);
     }
 
     @Override

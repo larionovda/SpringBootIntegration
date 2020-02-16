@@ -8,9 +8,11 @@ import java.util.List;
 
 @Repository
 public interface DataProduct {
-    Product getProductByArticle(Long article);
+    List<Product> getProductsByPrice(BigDecimal price);
 
     List<Product> getAllProducts();
+
+    Product getProductByArticle(Long article);
 
     void addProduct(Product product);
 

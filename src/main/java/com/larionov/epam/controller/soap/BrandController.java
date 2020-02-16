@@ -10,7 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
-public class SoapController {
+public class BrandController {
     private static final String NAMESPACE_URI = "http://larionov.com/epam-spring-boot-soap";
 
     @Autowired

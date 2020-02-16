@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Products</title>
+</head>
+<body>
+
+<section>
+    <div>
+        <h2>Products</h2>
+
+
+        <div>
+            <form th:action="@{/product/getProductByPrice}" th:method="get">
+                <p><input type="text"  th:name="price" placeholder="search by price"/>
+                    <input type="submit" value="find"/></p>
+            </form>
+        </div>
+
+        <div th:each="product : ${products}"
+             th:with="fullName = 'Article: ' + ${product.article} + ', Price: ' + ${product.price}">
+            <div th:utext="${fullName}"></div>
+            <form action="#" th:action="@{'/product/{id}'(id=${product.article})}" th:method="delete">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit">Delete this product</button>
+            </form>
+            <form action="#" th:action="@{'/product/update-product/{id}'(id=${product.article})}">
+                <input type="hidden" name="_method" value="update"/>
+                <button type="submit">Update this product</button>
+            </form>
+            <p></p>
+        </div>
+    </div>
+    <div>
+        <a href="/product/add-product">
+            <div>Add a new product</div>
+        </a>
+    </div>
+</section>
+
+</body>
+
+</html>

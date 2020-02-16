@@ -3,19 +3,23 @@ package com.larionov.epam.service.rest;
 import com.larionov.epam.item.Product;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public interface ProductService {
-    CompletableFuture<Product> getProductByArticle(Long Article);
+    CompletableFuture<List<Product>> getProductsByPrice(BigDecimal price) throws ExecutionException, InterruptedException;
 
-    CompletableFuture<List<Product>> getAllProduct();
+    CompletableFuture<List<Product>> getAllProduct() throws ExecutionException, InterruptedException;
+
+    CompletableFuture<Product> getProductByArticle(Long Article);
 
     void addNewProducts(Product product);
 
     void deleteProductById(Long Article);
 
-    void updateProductByArticle(Product product, Long article);
+    void updateProductByArticle(Product product);
 
 }
