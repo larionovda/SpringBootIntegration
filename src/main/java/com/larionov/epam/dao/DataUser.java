@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface DataUser {
     Optional<User> findByUserName(@NonNull String username);
-    void addUser(User user);
+    void addUser(String userName, String password);
 }

@@ -20,7 +20,7 @@
         <div class="alert alert-danger" role="alert" th:if="${error}">
             Invalid Name or password
         </div>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/user/login}" method="post">
             <input name="_csrf" type="hidden">
             <div>
                 <label>Name</label>

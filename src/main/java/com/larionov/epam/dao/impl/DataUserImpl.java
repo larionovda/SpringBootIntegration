@@ -30,7 +30,7 @@ public class DataUserImpl implements DataUser {
     }
 
     @Override
-    public void addUser(@NonNull User user) {
-        jdbcTemplate.update(SQL_INSERT_INTO, user.getUsername(), user.getPassword());
+    public void addUser(String username, String password) {
+        jdbcTemplate.update(SQL_INSERT_INTO, username, password);
     }
 }

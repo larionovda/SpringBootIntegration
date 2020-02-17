@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add products</title>
+</head>
+<body>
+<section>
+    <div>
+        <div>
+            <div>
+                <form th:action="@{/user/addUser}" th:method="post">
+                    <p>User name<input type="text"  th:name="userName" placeholder="user name"/>
+                    <p>Password<input type="text"  th:name="password" placeholder="password"/>
+                        <input type="submit" value="Registration"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>
