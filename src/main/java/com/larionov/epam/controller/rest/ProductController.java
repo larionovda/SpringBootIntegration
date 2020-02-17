@@ -24,9 +24,6 @@ public class ProductController {
     private ModelAndView modelAndView = new ModelAndView("index");
 
 
-
-
-
     @GetMapping
     public ModelAndView getAllProducts(@RequestParam("page") Optional<Integer> page,
                                        @RequestParam("size") Optional<Integer> size) throws ExecutionException, InterruptedException {
@@ -34,8 +31,10 @@ public class ProductController {
         int pageSize = size.orElse(3);
 
         Page<Product> productPage = productService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        List<Product> products = productPage.getContent();
 
         modelAndView.addObject("productPage", productPage);
+        modelAndView.addObject("products", productPage);
 
         int totalPages = productPage.getTotalPages();
         if (totalPages > 0) {
@@ -47,13 +46,6 @@ public class ProductController {
 
         return modelAndView;
     }
-
-
-//    @GetMapping
-//    public ModelAndView getAllProducts() throws ExecutionException, InterruptedException {
-//        modelAndView.addObject("products", productService.getAllProduct().get());
-//        return modelAndView;
-//    }
 
     @GetMapping("/getProductByPrice")
     public ModelAndView getProductsByPrice(@RequestParam(value = "price", required = false) BigDecimal price) throws ExecutionException, InterruptedException {

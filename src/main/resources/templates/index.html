@@ -31,7 +31,7 @@
             </form>
         </div>
 
-        <div th:each="product : ${productPage.content}"
+        <div th:each="product : ${products}"
              th:with="fullName = 'Article: ' + ${product.article} + ', Price: ' + ${product.price}">
             <div th:utext="${fullName}"></div>
             <form action="#" th:action="@{'/product/{id}'(id=${product.article})}" th:method="delete">
