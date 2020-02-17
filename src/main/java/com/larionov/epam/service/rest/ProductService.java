@@ -1,6 +1,8 @@
 package com.larionov.epam.service.rest;
 
 import com.larionov.epam.item.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,5 +23,7 @@ public interface ProductService {
     void deleteProductById(Long Article);
 
     void updateProductByArticle(Product product);
+
+    Page<Product> findPaginated(Pageable pageable);
 
 }

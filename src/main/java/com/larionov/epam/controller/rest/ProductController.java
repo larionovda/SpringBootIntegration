@@ -3,11 +3,17 @@ package com.larionov.epam.controller.rest;
 import com.larionov.epam.item.Product;
 import com.larionov.epam.service.rest.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("product")
@@ -17,11 +23,37 @@ public class ProductController {
     private ProductService productService;
     private ModelAndView modelAndView = new ModelAndView("index");
 
+
+
+
+
     @GetMapping
-    public ModelAndView getAllProducts() throws ExecutionException, InterruptedException {
-        modelAndView.addObject("products", productService.getAllProduct().get());
+    public ModelAndView getAllProducts(@RequestParam("page") Optional<Integer> page,
+                                       @RequestParam("size") Optional<Integer> size) throws ExecutionException, InterruptedException {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(3);
+
+        Page<Product> productPage = productService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+        modelAndView.addObject("productPage", productPage);
+
+        int totalPages = productPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+
         return modelAndView;
     }
+
+
+//    @GetMapping
+//    public ModelAndView getAllProducts() throws ExecutionException, InterruptedException {
+//        modelAndView.addObject("products", productService.getAllProduct().get());
+//        return modelAndView;
+//    }
 
     @GetMapping("/getProductByPrice")
     public ModelAndView getProductsByPrice(@RequestParam(value = "price", required = false) BigDecimal price) throws ExecutionException, InterruptedException {
@@ -57,5 +89,6 @@ public class ProductController {
         modelAndView.addObject("product", productService.getProductByArticle(id).get());
         return modelAndView;
     }
-
 }
+
+
