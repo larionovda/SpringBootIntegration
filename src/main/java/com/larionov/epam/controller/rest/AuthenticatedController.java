@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("user")
@@ -33,8 +34,8 @@ public class AuthenticatedController {
     @PostMapping("addUser")
     public ModelAndView addNewProduct(@RequestParam(value = "userName") String userName,
                                       @RequestParam(value = "password") String password) {
-        userService.addNewUser(userName, "{noop}" + password);
-        return new ModelAndView("redirect:/user/login");
+        userService.addNewUser(userName, "{noop}".concat(password));
+        return new ModelAndView(new RedirectView("/product"));
     }
 
 

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public interface DataProduct {
+public interface ProductDAO {
     List<Product> getProductsByPrice(BigDecimal price);
 
     List<Product> getAllProducts();

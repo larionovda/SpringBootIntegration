@@ -1,13 +1,17 @@
 package com.larionov.epam.item;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Component
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product implements Serializable {

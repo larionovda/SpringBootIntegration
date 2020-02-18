@@ -1,10 +1,9 @@
 package com.larionov.epam.dao.impl;
 
-import com.larionov.epam.dao.DataProduct;
+import com.larionov.epam.dao.ProductDAO;
 import com.larionov.epam.item.Product;
 import com.larionov.epam.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public class DataProductImpl implements DataProduct {
+public class ProductDAOImpl implements ProductDAO {
 
     private final String SQL_QUERY_GET_PRODUCT_PRICE = "SELECT *\n" +
             "\tFROM public.\"Products\" where price = ?";
@@ -25,8 +24,7 @@ public class DataProductImpl implements DataProduct {
     private final String SQL_UPDATE_BY_ID = "UPDATE public.\"Products\"\n" +
             "\tSET id_brand = ?, id_type = ?, id_category = ?, price = ?, id_supplier = ?\n" +
             "\tWHERE article = ?;";
-    private final String SQL_QUERY_GET_PRODUCT_ID = "SELECT *\n" +
-            "\tFROM public.\"Products\" where article = ?";
+    private final String SQL_QUERY_GET_PRODUCT_ID = "SELECT * FROM public.\"Products\" where article = ?";
 
 
     @Autowired
@@ -45,7 +43,7 @@ public class DataProductImpl implements DataProduct {
     }
 
     @Override
-    @Cacheable("product")
+    //@Cacheable("product")
     public Product getProductByArticle(Long article) {
         return jdbcTemplate.queryForObject(SQL_QUERY_GET_PRODUCT_ID, new Object[]{article}, productMapper);
     }

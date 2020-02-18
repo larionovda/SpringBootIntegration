@@ -1,6 +1,6 @@
 package com.larionov.epam.dao.impl;
 
-import com.larionov.epam.dao.DataUser;
+import com.larionov.epam.dao.UserDAO;
 import com.larionov.epam.item.User;
 import com.larionov.epam.mapper.UserMapper;
 import lombok.NonNull;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class DataUserImpl implements DataUser {
+public class UserDAOImpl implements UserDAO {
 
     private final String SQL_QUERY_GET_USER_NAME = "SELECT user_name, password\n" +
             " FROM public.\"Order\" where user_name = ?";

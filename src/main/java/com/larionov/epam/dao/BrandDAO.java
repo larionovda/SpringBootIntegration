@@ -4,6 +4,6 @@ import generated.Brand;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DataBrand {
+public interface BrandDAO {
     Brand getBrandByID(Long id);
 }

@@ -1,6 +1,6 @@
 package com.larionov.epam.service.rest.impl;
 
-import com.larionov.epam.dao.DataUser;
+import com.larionov.epam.dao.UserDAO;
 import com.larionov.epam.service.rest.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Autowired
-    private DataUser dataUser;
+    private UserDAO dataUser;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

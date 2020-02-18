@@ -1,6 +1,6 @@
 package com.larionov.epam.service.rest.impl;
 
-import com.larionov.epam.dao.DataProduct;
+import com.larionov.epam.dao.ProductDAO;
 import com.larionov.epam.item.Product;
 import com.larionov.epam.service.rest.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private DataProduct dataProduct;
+    private ProductDAO dataProduct;
 
     @Override
     public Page<Product> findPaginated(Pageable pageable) {

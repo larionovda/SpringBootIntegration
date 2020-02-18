@@ -1,6 +1,6 @@
 package com.larionov.epam.dao.impl;
 
-import com.larionov.epam.dao.DataBrand;
+import com.larionov.epam.dao.BrandDAO;
 import com.larionov.epam.mapper.BrandMapper;
 import generated.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class DataBrandImpl implements DataBrand {
+public class BrandDAOImpl implements BrandDAO {
     private static final String SQL_GET_ONE_BRAND = "SELECT id, name\n" +
             "\tFROM public.\"Brand\" where id = ?";
 
